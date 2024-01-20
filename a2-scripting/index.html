@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web Technology</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Web Technology</h1>
+        <nav>
+            <ul>
+                <li><a href="#favorite-musical-movies">Favorite musical movies</a></li>
+                <li><a href="#highest-grossing-musical-movies">Highest&#8209;grossing musical movies</a></li>
+                <li><a href="#top-broadway-musicals">Top Broadway musicals</a></li>
+                <li><a href="#types-of-musicals">Types of musicals</a></li>
+            </ul>
+        </nav>
+        <section id="favorite-musical-movies">
+            <h2>Favorite musical movies</h2>
+            <form action="https://webtech.labs.vu.nl/api24/f81597a7" target="_blank" method="post">
+                <table>
+                    <caption>Favorite musical movies</caption>
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Name</th>
+                            <th>Year</th>
+                            <th>Genre</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BMjI1NDYzNzY2Ml5BMl5BanBnXkFtZTgwODQwODczNTM@._V1_.jpg" alt="Poster The Greatest Showman"></td>
+                            <td>The Greatest Showman</td>
+                            <td>2017</td>
+                            <td>Biography, Drama, Musical</td>
+                            <td>Celebrates the birth of show business and tells of a visionary who rose from nothing to create a spectacle that became a worldwide sensation.</td>
+                        </tr>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BMzQ5ZDZhZDItZTNmZi00MWQ0LWJlNDUtZTE4ZWJmODNlM2Y3XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_.jpg" alt="Poster West Side Story"></td>
+                            <td>West Side Story</td>
+                            <td>2021</td>
+                            <td>Crime, Drama, Musical</td>
+                            <td>An adaptation of the 1957 musical, West Side Story explores forbidden love and the rivalry between the Jets and the Sharks, two teenage street gangs of different ethnic backgrounds.</td>
+                        </tr>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BZmUyMDEyOTgtZmUwOS00NTdkLThlNzctNTM1ODQ4M2VhMjdhXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="Poster Grease"></td>
+                            <td>Grease</td>
+                            <td>1978</td>
+                            <td>Comedy, Musical, Romance</td>
+                            <td>Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?</td>
+                        </tr>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BZmFhMzFkZTMtNmUxNS00OWQ1LTlhNjMtYzhmNTU4NmUzZDQwXkEyXkFqcGdeQXVyMTkzODUwNzk@._V1_.jpg" alt="Poster Hairspray"></td>
+                            <td>Hairspray</td>
+                            <td>2007</td>
+                            <td>Comedy, Drama, Musical</td>
+                            <td>Pleasantly plump teenager Tracy Turnblad teaches 1962 Baltimore a thing or two about integration after landing a spot on a local TV dance show.</td>
+                        </tr>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BODUzNjUzNzIzM15BMl5BanBnXkFtZTcwMjc4MjkzNA@@._V1_.jpg" alt="Poster Hair"></td>
+                            <td>Hair</td>
+                            <td>1979</td>
+                            <td>Comedy, Drama, Musical</td>
+                            <td>Claude Bukowski leaves the family ranch in Oklahoma for New York where he is rapidly embraced into the hippie group of youngsters led by Berger, yet he's already been drafted. He soon falls in love with Sheila Franklin, a rich girl but still a rebel inside.</td>
+                        </tr>
+                        <tr>
+                            <td><img src="https://m.media-amazon.com/images/M/MV5BOTNmZWI2NzItNmNmMC00ZGY2LWE4ZTAtNjMxZTJiZWUwMzAyL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="Poster Rent"></td>
+                            <td>Rent</td>
+                            <td>2005</td>
+                            <td>Drama, Musical, Romance</td>
+                            <td>In New York City's gritty East Village, a group of bohemians strive for success and acceptance while enduring the obstacles of poverty, illness and the AIDS epidemic.</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <p>
+                                    <label for="poster">Poster</label>
+                                    <input type="url" id="poster" name="poster" required>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <label for="year">Year</label>
+                                    <input type="number" id="year" name="year" min="1888" max="2024" step="1" required>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <label for="genre">Genre</label>
+                                    <input type="text" id="genre" name="genre" required>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <label for="description">Description</label>
+                                    <textarea id="description" name="description" required></textarea>
+                                </p>
+                                <input type="submit">
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </section>
+        <section id="highest-grossing-musical-movies">
+            <h2>Highest&#8209;grossing musical movies</h2>
+            <ol>
+                <li>The Lion King (2019)</li>
+                <li>Beauty and the Beast (2017)</li>
+                <li>Frozen 2 (2019)</li>
+                <li>The Lion King (1994)</li>
+                <li>Frozen (2013)</li>
+                <li>The Jungle Book (2016)</li>
+                <li>Aladdin (2019)</li>
+                <li>The Little Mermaid (2023)</li>
+                <li>The Grinch (2018)</li>
+                <li>Sing (2016)</li>
+            </ol>
+            <a href="https://www.imdb.com/search/title/?title_type=feature&genres=musical&sort=boxoffice_gross_us,desc" target="_blank">Source</a>
+        </section>
+        <section id="top-broadway-musicals">
+            <h2>Top Broadway musicals</h2>
+            <figure>
+                <img src="https://images.ctfassets.net/6pezt69ih962/2KjcmY0wMQJq2ItBuENMiv/67d26f770373d5355336ea5400162485/Top10BroadwayMusicals1200x600.jpg" alt="Top 10 Broadway musicals">
+                <figcaption><abbr title="From Left to Right">FLTR</abbr>: Hadestown, Chicago, Moulin Rouge! The Musical, Dear Evan Hansen, Wicked, The Phantom of the Opera, The Lion King, Hamilton, The Book of Mormon, and Come From Away.</figcaption>
+            </figure>
+            <a href="https://www.newyorktheatreguide.com/theatre-news/news/top-10-broadway-musicals" target="_blank">Source</a>
+        </section>
+        <section id="types-of-musicals">
+            <h2>Types of musicals</h2>
+            <dl>
+                <dt><strong>Book musicals</strong></dt>
+                <dd>Book musicals are perhaps the most traditional form of musical theatre, featuring a clear narrative structure with the songs and dances advancing the plot and character development. Examples of book musicals include classics such as <em>West Side Story</em> and <em>The Sound of Music</em>, as well as more recent hits like <em>Hamilton</em> and <em>Dear Evan Hansen</em>.</dd>
+                <dt><strong>Jukebox musicals</strong></dt>
+                <dd>Jukebox musicals are built around pre&#8209;existing songs, often from a particular artist or era. Examples of jukebox musicals include <em>Mamma Mia!</em> which features the music of ABBA, and <em>Jersey Boys</em>, which tells the story of Frankie Valli and The Four Seasons. The best of this type of musical is <em>Beautiful: The Carole King Musical</em>, which tells the story of the legendary singer&#8209;songwriter and features many of her hit songs.</dd>
+                <dt><strong>Revue musicals</strong></dt>
+                <dd>Revue musicals are collections of loosely connected musical numbers, often with a specific theme. The best example of this type of musical is <em>Ain't Misbehavin'</em>, which celebrates the music of Fats Waller and the Harlem Renaissance.</dd>
+                <dt><strong>Rock musicals</strong></dt>
+                <dd>Rock musicals feature a rock music score, often with edgier themes and subject matter. Examples of rock musicals include <em>Rent</em>, which explores the lives of struggling artists in New York City, and <em>Spring Awakening</em>, which deals with adolescent sexuality and rebellion. The best of this type of musical is <em>Jesus Christ Superstar</em>, which tells the story of the last week of Jesus' life and features a classic rock score by Andrew Lloyd Webber and Tim Rice.</dd>
+                <dt><strong>Concept musicals</strong></dt>
+                <dd>Concept musicals are built around a central idea or concept, often with a more experimental structure. The best example of this type of musical is <em>Company</em>, which explores the complexities of modern relationships through a series of vignettes.</dd>
+                <dt><strong>Operettas</strong></dt>
+                <dd>Operettas are lighter, more comedic musicals with a focus on music and dancing. The best example of this type of musical is <em>The Pirates of Penzance</em>, which tells the story of a young pirate apprentice and features catchy tunes and witty lyrics.</dd>
+                <dt><strong>Pastiche musicals</strong></dt>
+                <dd>Pastiche musicals borrow from different styles and genres, often with a more tongue&#8209;in&#8209;cheek tone. Examples of pastiche musicals include <em>The Drowsy Chaperone</em>, which pokes fun at traditional musical theatre tropes, and <em>Spamalot</em>, which parodies the legend of King Arthur and the Knights of the Round Table. The best of this type of musical is <em>Crazy For You</em>, which pays homage to the classic Broadway musicals of the 1930s with its toe&#8209;tapping tunes and dazzling choreography.</dd>
+                <dt><strong>Disney&#8209;style musicals</strong></dt>
+                <dd>Disney&#8209;style musicals are family&#8209;friendly and often based on animated films. Examples of Disney&#8209;style musicals include <em>The Lion King</em>, <em>Aladdin</em>, and <em>Frozen</em>. The best of this type of musical is <em>Beauty and the Beast</em>, which brings the beloved animated film to life with its stunning sets, memorable songs, and enchanting story.</dd>
+            </dl>
+            <a href="https://www.theatrehaus.com/2023/04/8-types-of-musicals-and-the-best-of-the-types/" target="_blank">Source</a>
+        </section>
+        <footer>
+            <p>Thank you for visiting this web page!</p>
+            <pre>
+    ; 
+    ;;
+    ;';.
+    ;  ;;
+    ;   ;;
+    ;    ;;
+    ;    ;;
+    ;   ;'
+    ;  ' 
+,;;;,; 
+;;;;;;
+`;;;;'
+            </pre>
+        </footer>
+    </body>
+</html>
