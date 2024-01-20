@@ -2,17 +2,16 @@
     --color-1: #F2E9E4;
     --color-2: #C9ADA7;
     --color-3: #9A8C98;
-    --color-4: #4A4E69;
-    --color-5: #22223B;
+    --color-4: #726D81;
+    --color-5: #4A4E69;
+    --color-6: #22223B;
 }
 
 body {
     background-color: var(--color-1);
-    color: var(--color-5);
+    color: var(--color-6);
     font-family: Optima, sans-serif;
     margin: 2rem;
-    orphans: 2;
-    widows: 2;
 }
 
 h1 {
@@ -21,9 +20,17 @@ h1 {
 }
 
 ul {
+    display: flex;
+    flex-wrap: wrap;
     list-style-image: linear-gradient(to left, var(--color-1), var(--color-2));
     list-style-position: inside;
     list-style-type: disc;
+    padding-left: 0;
+}
+
+ul li {
+    flex-grow: 1;
+    padding: .5rem;
 }
 
 h2 {
@@ -32,22 +39,22 @@ h2 {
     text-decoration: overline;
 }
 
-a:hover {
-    color: var(--color-5);
-}
-
 a:link {
-    color: var(--color-4);
+    color: var(--color-5);
     font-style: oblique;
     transition: all .1s;
 }
 
+a:hover {
+    color: var(--color-6);
+}
+
 a:visited {
-    color: var(--color-3);
+    color: var(--color-4);
 }
 
 a:visited:hover {
-    color: var(--color-4);
+    color: var(--color-5);
 }
 
 a:active {
@@ -71,8 +78,8 @@ table {
 }
 
 caption {
-    font-size: 17px;
     margin-bottom: .5rem;
+    text-align: left;
 }
 
 caption, input[type=submit], footer p {
@@ -94,6 +101,11 @@ td {
 td p {
     margin: 0;
     width: 100%;
+}
+
+p {
+    orphans: 2;
+    widows: 2;
 }
 
 td img {
@@ -145,7 +157,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: var(--color-4);
+    background-color: var(--color-5);
 }
 
 ol {
@@ -212,8 +224,12 @@ footer p {
     table {
         padding: .2rem;
     }
+
+    caption {
+        padding-left: .5rem;
+    }
 	
-	caption, thead { 
+	thead { 
 		display: none;
 	}
 	
