@@ -1,4 +1,5 @@
 const form = document.querySelector("form")
+
 form.addEventListener("submit", async event => {
     event.preventDefault()
 
@@ -19,4 +20,10 @@ form.addEventListener("submit", async event => {
         <td>${formData.get("description")}</td>
     `
     document.querySelector("tbody").appendChild(tr)
+})
+
+form.addEventListener("reset", async () => {
+    const response = await fetch("https://webtech.labs.vu.nl/api24/f81597a7/reset")
+    const result = await response.text()
+    console.log(result)
 })
