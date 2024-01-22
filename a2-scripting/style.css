@@ -77,6 +77,7 @@ table {
     caption-side: top;
     padding: .5rem;
     text-align: center;
+    width: 100%;
 }
 
 caption {
@@ -111,6 +112,51 @@ td img {
     width: 5rem;
 }
 
+tfoot td div button, tfoot td div input[type=reset] {
+    margin-bottom: .1rem;
+    margin-top: .1rem;
+    width: 125px;
+}
+
+.modal {
+    background-color: var(--color-1);
+    border-radius: 8px;
+    box-sizing: border-box;
+    left: 50%;
+    padding: 1rem;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    z-index: 1;
+}
+
+.modal button {
+    float: right;
+    margin-bottom: .5rem;
+    padding: .5rem;
+}
+
+.overlay {
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    -webkit-backdrop-filter: blur(2px);
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+label, input[type=url], input[type=text], input[type=number], textarea {
+    flex-grow: 1;
+    width: 100%;
+}
+
 label {
     font-size: .9rem;
     font-weight: bold;
@@ -124,21 +170,13 @@ input, textarea, button {
     padding: .6rem;
 }
 
-input:focus, textarea:focus {
+input[type=url]:focus, input[type=text]:focus, input[type=number]:focus, input[type=submit]:focus, textarea:focus {
     outline: 3px solid var(--color-3);
-}
-
-tfoot td:last-child {
-    align-items: center;
-    display: flex;
-    justify-content: center;
 }
 
 td:last-of-type p {
     align-items: center;
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
 }
 
 textarea {
@@ -149,7 +187,7 @@ input[type=submit], input[type=reset], input[type=radio], input[type=radio] ~ la
     cursor: pointer;
 }
 
-input[type=submit], button {
+input[type=submit], input[type=reset], button {
     background-color: var(--color-3);
     color: var(--color-1);
     font-size: .8rem;
@@ -158,20 +196,23 @@ input[type=submit], button {
     transition: background-color .15s;
 }
 
+input[type=submit] {
+    margin-top: 1rem;
+}
+
 input[type=submit]:hover, button:hover {
     background-color: var(--color-5);
 }
 
-input[type=reset] {
+input[type=reset], .modal button {
     background-color: var(--color-7);
-    color: var(--color-1);
-    font-size: .8rem;
-    margin-left: 8px;
-    padding: 1em;
-    transition: background-color .15s;
 }
 
-input[type=reset]:hover {
+input[type=reset] {
+    margin-left: 1rem;
+}
+
+input[type=reset]:hover, .modal button:hover {
     background-color: var(--color-8);
 }
 
@@ -184,7 +225,7 @@ input[type=radio] {
     outline: none;
 }
 
-button {
+fieldset button {
     font-size: .75rem;
     margin-left: 0;
     padding: .5em .8em;
@@ -305,8 +346,38 @@ footer p {
         content: "Description";
     }
 
-    tfoot label {
+    tfoot td:before {
         display: none;
+    }
+
+    tfoot td {
+        padding-left: 0;
+    }
+
+    tfoot td div {
+        display: flex;
+        gap: 16px;
+    }
+
+    tfoot td div button, tfoot td div input[type=reset] {
+        width: 100%;
+    }
+
+    td:last-of-type p {
+        flex-direction: column;
+        margin: .5rem;
+    }
+
+    td:last-of-type p label {
+        margin-bottom: .5rem;
+    }
+
+    .modal {
+        width: 90vw;
+    }
+
+    .modal button {
+        margin-bottom: 0;
     }
 
     table input, table textarea {
@@ -320,12 +391,11 @@ footer p {
         flex-direction: column;
     }
 
-    input[type=submit], input[type=reset] {
+    input[type=reset] {
         margin-left: 0;
-        margin-top: 1rem;
     }
 
-    button {
+    fieldset button {
         font-size: .8rem;
         padding: .6em .9em;
     }
@@ -341,6 +411,10 @@ footer p {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .modal {
+        width: 70vw;
+    }
+
     footer {
         width: 100vw;
     }

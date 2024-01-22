@@ -27,7 +27,7 @@ async function load(year = null) {
 
     if (!year) {
         years.sort()
-        const div = document.querySelector("div")
+        const div = document.querySelector("fieldset div")
         div.innerHTML = ``
 
         for (const element of years) {
@@ -40,45 +40,51 @@ async function load(year = null) {
 
             input.addEventListener("change", () => {
                 load(element)
-                window.scrollTo(0, 0)
             })
         }
     }
+}
+
+const overlay = document.querySelector(".overlay")
+const modal = document.querySelector(".modal")
+
+document.querySelector("div button").addEventListener("click", open)
+document.querySelector(".modal button").addEventListener("click", close)
+overlay.addEventListener("click", close)
+
+function open() {
+    modal.classList.remove("hidden")
+    overlay.classList.remove("hidden")
+}
+
+function close() {
+    modal.classList.add("hidden")
+    overlay.classList.add("hidden")
 }
 
 const form = document.querySelector("form")
 
 form.addEventListener("submit", async event => {
     event.preventDefault()
+    close()
 
-    const formData = new FormData(form)
     await fetch("https://webtech.labs.vu.nl/api24/f81597a7", {
         method: "POST",
-        body: new URLSearchParams(formData)
+        body: new URLSearchParams(new FormData(form))
     })
-    
-    const tr = document.createElement("tr")
-    tr.innerHTML = `
-        <td><img src="${formData.get("poster")}" alt="Poster ${formData.get("name")}"></td>
-        <td>${formData.get("name")}</td>
-        <td>${formData.get("year")}</td>
-        <td>${formData.get("genre")}</td>
-        <td>${formData.get("description")}</td>
-    `
-    document.querySelector("tbody").appendChild(tr)
+    load()
 })
 
-form.addEventListener("reset", async () => {
+document.querySelector("input[type=reset]").addEventListener("click", async () => {
     await fetch("https://webtech.labs.vu.nl/api24/f81597a7/reset")
     load()
 })
 
-document.querySelector("button").addEventListener("click", () => {
+document.querySelector("fieldset button").addEventListener("click", () => {
     const input = document.querySelector("input[name=year]:checked")
 
     if (input) {
         input.checked = false
         load()
-        window.scrollTo(0, 0)
     }
 })
