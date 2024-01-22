@@ -2,7 +2,7 @@ const url = "https://webtech.labs.vu.nl/api24/f81597a7"
 
 load()
 
-async function load(year = null) {
+async function load(year = null, search = "") {
     const response = await fetch(url)
     const result = await response.json()
     const tbody = document.querySelector("tbody")
@@ -10,7 +10,7 @@ async function load(year = null) {
     const years = []
 
     result.forEach(element => {
-        if (!year || year == element["year"]) {
+        if ((!year || year == element["year"]) && (!search || (element["name"].includes(search) || element["genre"].includes(search)))) {
             const tr = document.createElement("tr")
             tr.innerHTML = `
                 <td><img src="${element["poster"]}" alt="Poster ${element["name"]}" class="id-${element["id"]}"></td>
@@ -34,30 +34,32 @@ async function load(year = null) {
                 document.querySelector("input[type=submit]").id = `id-${element["id"]}`
                 open()
             })
+        }
 
-            if (!years.includes(element["year"])) {
-                years.push(element["year"])
-            }
+        if (!years.includes(element["year"])) {
+            years.push(element["year"])
         }
     })
 
-    if (!year) {
-        years.sort()
-        const div = document.querySelector("fieldset div")
-        div.innerHTML = ``
+    years.sort()
+    const div = document.querySelector("fieldset div")
+    div.innerHTML = ""
 
-        for (const element of years) {
-            const input = document.createElement("div")
-            input.innerHTML = `
-                <input type="radio" id="${element}" name="year" value="${element}">
-                <label for="${element}">${element}</label>
-            `
-            div.appendChild(input)
+    for (const element of years) {
+        const input = document.createElement("div")
+        input.innerHTML = `
+            <input type="radio" id="${element}" name="year" value="${element}">
+            <label for="${element}">${element}</label>
+        `
+        div.appendChild(input)
 
-            input.addEventListener("change", () => {
-                load(element)
-            })
-        }
+        input.addEventListener("change", () => {
+            load(element, document.querySelector("input[type=search]").value)
+        })
+    }
+
+    if (year) {
+        document.querySelector(`input[type=radio][value="${year}"]`).checked = true
     }
 }
 
@@ -108,11 +110,16 @@ document.querySelector("input[type=reset]").addEventListener("click", async () =
     load()
 })
 
+document.querySelector("input[type=search]").addEventListener("input", event => {
+    const year = document.querySelector("input[type=radio]:checked") ? document.querySelector("input[type=radio]:checked").value : null
+    load(year, event.target.value)
+})
+
 document.querySelector("fieldset button").addEventListener("click", () => {
-    const input = document.querySelector("input[name=year]:checked")
+    const input = document.querySelector("input[type=radio]:checked")
 
     if (input) {
         input.checked = false
-        load()
+        load(null, document.querySelector("input[type=search]").value)
     }
 })
