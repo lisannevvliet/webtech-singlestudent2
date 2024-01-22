@@ -127,7 +127,7 @@ input:focus, textarea:focus {
     outline: 3px solid var(--color-3);
 }
 
-tr:last-child td:last-child {
+tfoot td:last-child {
     align-items: center;
     display: flex;
     justify-content: center;

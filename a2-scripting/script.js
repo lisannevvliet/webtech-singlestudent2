@@ -1,3 +1,24 @@
+load()
+
+async function load() {
+    const response = await fetch("https://webtech.labs.vu.nl/api24/f81597a7")
+    const result = await response.json()
+
+    const tbody = document.querySelector("tbody")
+    tbody.innerHTML = ""
+    result.forEach(element => {
+        const tr = document.createElement("tr")
+        tr.innerHTML = `
+            <td><img src="${element["poster"]}" alt="Poster ${element["name"]}"></td>
+            <td>${element["name"]}</td>
+            <td>${element["year"]}</td>
+            <td>${element["genre"]}</td>
+            <td>${element["description"]}</td>
+        `
+        tbody.appendChild(tr)
+    })
+}
+
 const form = document.querySelector("form")
 
 form.addEventListener("submit", async event => {
@@ -23,7 +44,7 @@ form.addEventListener("submit", async event => {
 })
 
 form.addEventListener("reset", async () => {
-    const response = await fetch("https://webtech.labs.vu.nl/api24/f81597a7/reset")
-    const result = await response.text()
-    console.log(result)
+    await fetch("https://webtech.labs.vu.nl/api24/f81597a7/reset")
+
+    load()
 })
