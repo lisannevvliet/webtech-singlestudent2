@@ -1,7 +1,9 @@
+const url = "https://webtech.labs.vu.nl/api24/f81597a7"
+
 load()
 
 async function load(year = null) {
-    const response = await fetch("https://webtech.labs.vu.nl/api24/f81597a7")
+    const response = await fetch(url)
     const result = await response.json()
     const tbody = document.querySelector("tbody")
     tbody.innerHTML = ""
@@ -11,13 +13,27 @@ async function load(year = null) {
         if (!year || year == element["year"]) {
             const tr = document.createElement("tr")
             tr.innerHTML = `
-                <td><img src="${element["poster"]}" alt="Poster ${element["name"]}"></td>
-                <td>${element["name"]}</td>
-                <td>${element["year"]}</td>
-                <td>${element["genre"]}</td>
-                <td>${element["description"]}</td>
+                <td><img src="${element["poster"]}" alt="Poster ${element["name"]}" class="id-${element["id"]}"></td>
+                <td class="id-${element["id"]}">${element["name"]}</td>
+                <td class="id-${element["id"]}">${element["year"]}</td>
+                <td class="id-${element["id"]}">${element["genre"]}</td>
+                <td class="id-${element["id"]}">${element["description"]}</td>
+                <td><button id="id-${element["id"]}">✎</button></td>
             `
             tbody.appendChild(tr)
+
+            document.querySelector(`#id-${element["id"]}`).addEventListener("click", () => {
+                const input = document.querySelectorAll(".input")
+                const result = document.querySelectorAll(`.id-${element["id"]}`)
+
+                for (let i = 0; i < 5; i++) {
+                    input[i].value = i == 0 ? result[i].src : result[i].textContent
+                }
+
+                document.querySelector("input[type=submit]").value = "Update"
+                document.querySelector("input[type=submit]").id = `id-${element["id"]}`
+                open()
+            })
 
             if (!years.includes(element["year"])) {
                 years.push(element["year"])
@@ -67,16 +83,28 @@ const form = document.querySelector("form")
 form.addEventListener("submit", async event => {
     event.preventDefault()
     close()
+    const body = new URLSearchParams(new FormData(form))
 
-    await fetch("https://webtech.labs.vu.nl/api24/f81597a7", {
-        method: "POST",
-        body: new URLSearchParams(new FormData(form))
-    })
+    if (document.querySelector("input[type=submit]").value == "Add") {
+        await fetch(url, {
+            method: "POST",
+            body: body
+        })
+    } else {
+        await fetch(`${url}/item/${document.querySelector("input[type=submit]").id.substring(3)}`, {
+            method: "PUT",
+            body: body
+        })
+
+        form.reset()
+        document.querySelector("input[type=submit]").value = "Add"
+    }
+    
     load()
 })
 
 document.querySelector("input[type=reset]").addEventListener("click", async () => {
-    await fetch("https://webtech.labs.vu.nl/api24/f81597a7/reset")
+    await fetch(`${url}/reset`)
     load()
 })
 

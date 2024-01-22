@@ -1,12 +1,12 @@
 :root {
-    --color-1: #F2E9E4;
-    --color-2: #C9ADA7;
-    --color-3: #9A8C98;
-    --color-4: #726D81;
-    --color-5: #4A4E69;
-    --color-6: #22223B;
-    --color-7: #A94438;
-    --color-8: #90453A;
+    --color-1: #f2e9e4;
+    --color-2: #c9ada7;
+    --color-3: #9a8c98;
+    --color-4: #726d81;
+    --color-5: #4a4e69;
+    --color-6: #22223b;
+    --color-7: #a94438;
+    --color-8: #90453a;
 }
 
 body {
@@ -198,6 +198,8 @@ input[type=submit], input[type=reset], button {
 
 input[type=submit] {
     margin-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem; 
 }
 
 input[type=submit]:hover, button:hover {
