@@ -59,7 +59,7 @@ a:visited:hover {
     color: var(--color-5);
 }
 
-a:active, caption, input[type=submit], input[type=reset], footer p {
+a:active, caption, input[type=submit], input[type=reset], legend, button, footer p {
     font-weight: bold;
 }
 
@@ -94,6 +94,7 @@ th, td {
 
 td {
     border-top: 1px solid var(--color-2);
+    word-wrap: break-word
 }
 
 td p {
@@ -115,7 +116,7 @@ label {
     font-weight: bold;
 }
 
-input, textarea {
+input, textarea, button {
     border-radius: 4px;
     border-style: none;
     box-sizing: border-box;
@@ -144,24 +145,26 @@ textarea {
     width: 100%;
 }
 
-input[type=submit] {
+input[type=submit], input[type=reset], input[type=radio], input[type=radio] ~ label, button {
+    cursor: pointer;
+}
+
+input[type=submit], button {
     background-color: var(--color-3);
     color: var(--color-1);
-    cursor: pointer;
     font-size: .8rem;
     margin-left: 8px;
     padding: 1em;
     transition: background-color .15s;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, button:hover {
     background-color: var(--color-5);
 }
 
 input[type=reset] {
     background-color: var(--color-7);
     color: var(--color-1);
-    cursor: pointer;
     font-size: .8rem;
     margin-left: 8px;
     padding: 1em;
@@ -170,6 +173,21 @@ input[type=reset] {
 
 input[type=reset]:hover {
     background-color: var(--color-8);
+}
+
+fieldset {
+    margin-top: .8rem;
+}
+
+input[type=radio] {
+    accent-color: var(--color-4);
+    outline: none;
+}
+
+button {
+    font-size: .75rem;
+    margin-left: 0;
+    padding: .5em .8em;
 }
 
 ol {
@@ -291,7 +309,7 @@ footer p {
         display: none;
     }
 
-    input, textarea {
+    table input, table textarea {
         left: -4px;
         margin-top: 0;
         position: relative;
@@ -305,6 +323,11 @@ footer p {
     input[type=submit], input[type=reset] {
         margin-left: 0;
         margin-top: 1rem;
+    }
+
+    button {
+        font-size: .8rem;
+        padding: .6em .9em;
     }
 
     figure {
