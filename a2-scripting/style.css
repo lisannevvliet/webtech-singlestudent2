@@ -112,6 +112,10 @@ td img {
     width: 5rem;
 }
 
+td > button {
+    margin: 0;
+}
+
 tfoot td div button, tfoot td div input[type=reset] {
     margin-bottom: .1rem;
     margin-top: .1rem;
@@ -348,6 +352,10 @@ footer p {
         content: "Description";
     }
 
+    td:nth-of-type(6):before {
+        content: "Update";
+    }
+
     tfoot td:before {
         display: none;
     }
@@ -382,7 +390,7 @@ footer p {
         margin-bottom: 0;
     }
 
-    table input, table textarea {
+    .modal table input, table textarea {
         left: -4px;
         margin-top: 0;
         position: relative;
