@@ -37,6 +37,7 @@ var app = express();
 
 // We need some middleware to parse JSON data in the body of our HTTP requests:
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 // ###############################################################################
 // Routes
@@ -44,6 +45,61 @@ app.use(express.json());
 // TODO: Add your routes here and remove the example routes once you know how
 //       everything works.
 // ###############################################################################
+app.get("/", (_, res) => {
+    db.all("SELECT * FROM media", (err, rows) => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            res.json(rows)
+        }
+    })
+})
+
+app.get("/:id", (req, res) => {
+    db.all("SELECT * FROM media WHERE id=?", req.params.id, (err, rows) => {
+        if (err) {
+            res.status(400).send(err)
+        } else if (rows.length === 0) {
+            res.sendStatus(404)
+        } else {
+            res.json(rows)
+        }
+    })
+})
+
+app.post("/", (req, res) => {
+    db.run("INSERT INTO media (poster, name, year, genre, description) VALUES (?, ?, ?, ?, ?)", [req.body.poster, req.body.name, req.body.year, req.body.genre, req.body.description], function (err) {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            res.status(201).json({ "id": this.lastID })
+        }
+    })
+})
+
+app.put("/:id", (req, res) => {
+  db.run("UPDATE media SET poster=?, name=?, year=?, genre=?, description=? WHERE id=?", [req.body.poster, req.body.name, req.body.year, req.body.genre, req.body.description, req.params.id], function (err) {
+      if (err) {
+          res.status(400).send(err)
+      } else if (this.changes === 0) {
+          res.sendStatus(404)
+      } else {
+          res.sendStatus(204)
+      }
+  })
+})
+
+app.delete("/:id", (req, res) => {
+  db.run("DELETE FROM media WHERE id=?", req.params.id, function (err) {
+      if (err) {
+          res.status(400).send(err)
+      } else if (this.changes === 0) {
+          res.sendStatus(404)
+      } else {
+          res.sendStatus(204)
+      }
+  })
+})
 
 // This example route responds to http://localhost:3000/hello with an example JSON object.
 // Please test if this works on your own device before you make any changes.
