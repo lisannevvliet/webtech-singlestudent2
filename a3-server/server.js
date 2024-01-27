@@ -58,17 +58,6 @@ app.get("/", (_, res) => {
     })
 })
 
-app.get("/reset", (_, res) => {
-    fs.unlink("./media.db", err => {
-        if (err) {
-            res.status(400).send(err)
-        } else {
-            db = my_database("./media.db")
-            res.sendStatus(204)
-        }
-    })
-})
-
 app.get("/:id", (req, res) => {
     db.all("SELECT * FROM media WHERE id=?", req.params.id, (err, rows) => {
         if (err) {
@@ -81,10 +70,29 @@ app.get("/:id", (req, res) => {
     })
 })
 
+const field = ["name", "year", "genre", "poster", "description", "id"]
+
 app.post("/", (req, res) => {
-    db.run("INSERT INTO media (poster, name, year, genre, description) VALUES (?, ?, ?, ?, ?)", [req.body.poster, req.body.name, req.body.year, req.body.genre, req.body.description], function (err) {
+    const parameters = [req.body.name, req.body.year, req.body.genre, req.body.poster, req.body.description]
+
+    db.run("INSERT INTO media (name, year, genre, poster, description) VALUES (?, ?, ?, ?, ?)", parameters, function (err) {
         if (err) {
-            res.status(400).send(err)
+            let sent = false
+
+            parameters.forEach((element, index) => {
+                if (!element) {
+                    res.status(400).json({
+                        "error": "Field missing",
+                        "field": field[index]
+                    })
+
+                    sent = true
+                }
+            })
+
+            if (!sent) {
+                res.status(400).send(err)
+            }
         } else {
             res.status(201).json({ "id": this.lastID })
         }
@@ -92,27 +100,55 @@ app.post("/", (req, res) => {
 })
 
 app.put("/:id", (req, res) => {
-  db.run("UPDATE media SET poster=?, name=?, year=?, genre=?, description=? WHERE id=?", [req.body.poster, req.body.name, req.body.year, req.body.genre, req.body.description, req.params.id], function (err) {
-      if (err) {
-          res.status(400).send(err)
-      } else if (this.changes === 0) {
-          res.sendStatus(404)
-      } else {
-          res.sendStatus(204)
-      }
-  })
+    const parameters = [req.body.name, req.body.year, req.body.genre, req.body.poster, req.body.description, req.params.id]
+
+    db.run("UPDATE media SET name=?, year=?, genre=?, poster=?, description=? WHERE id=?", parameters, function (err) {
+        if (err) {
+            let sent = false
+
+            parameters.forEach((element, index) => {
+                if (!element) {
+                    res.status(400).json({
+                        "error": "Field missing",
+                        "field": field[index]
+                    })
+
+                    sent = true
+                }
+            })
+
+            if (!sent) {
+                res.status(400).send(err)
+            }
+        } else if (this.changes === 0) {
+            res.status(404).json({ "error": `Item ${req.params.id} not found` })
+        } else {
+            res.sendStatus(204)
+        }
+    })
+})
+
+app.delete("/reset", (_, res) => {
+    fs.unlink("./media.db", err => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            db = my_database("./media.db")
+            res.sendStatus(204)
+        }
+    })
 })
 
 app.delete("/:id", (req, res) => {
-  db.run("DELETE FROM media WHERE id=?", req.params.id, function (err) {
-      if (err) {
-          res.status(400).send(err)
-      } else if (this.changes === 0) {
-          res.sendStatus(404)
-      } else {
-          res.sendStatus(204)
-      }
-  })
+    db.run("DELETE FROM media WHERE id=?", req.params.id, function (err) {
+        if (err) {
+            res.status(400).send(err)
+        } else if (this.changes === 0) {
+            res.status(404).json({ "error": `Item ${req.params.id} not found` })
+        } else {
+            res.sendStatus(204)
+        }
+    })
 })
 
 // This example route responds to http://localhost:3000/hello with an example JSON object.

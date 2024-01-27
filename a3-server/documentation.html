@@ -61,11 +61,6 @@
                 <strong>Status</strong><br>
                 <code>400 Bad Request</code>
             </p>
-            <hr>
-            <p>
-                <strong>Status</strong><br>
-                <code>404 Not Found</code>
-            </p>
         </div>
     </div>
     <div>
@@ -161,6 +156,20 @@
                 <strong>Status</strong><br>
                 <code>400 Bad Request</code>
             </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "error": "Field missing",
+    "field": "name"
+}</code></pre>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
         </div>
     </div>
     <h2>Update</h2>
@@ -170,7 +179,7 @@
             <hr>
             <p>
                 <strong>Description</strong><br>
-                Update image with ID 2.
+                Update image with ID 1.
             </p>
             <p>
                 <strong>Method</strong><br>
@@ -178,15 +187,15 @@
             </p>
             <p>
                 <strong>URL</strong><br>
-                <code>http://localhost:3000/2</code>
+                <code>http://localhost:3000/1</code>
             </p>
             <p class="body"><strong>Body</strong><br></p>
             <pre><code>{
-    "name": "Celeste",
-    "year": "2018",
-    "genre": "platformer, video-game",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Celeste_box_art_full.png",
-    "description": "Celeste is a critically acclaimed two-dimensional platform game developed by Maddy Makes Games. The player controls Madeline, a young woman who sets out to climb Celeste Mountain. The game features tight controls, challenging levels, and a touching story about overcoming personal demons."
+    "name": "Arcane",
+    "year": "2021",
+    "genre": "animation, action, adventure, tv-show",
+    "poster": "https://www.nerdpool.it/wp-content/uploads/2021/11/poster-arcane.jpg",
+    "description": "Set in Utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League Of Legends champions and the power that will tear them apart."
 }</code></pre>
         </div>
         <div>
@@ -201,11 +210,33 @@
                 <strong>Status</strong><br>
                 <code>400 Bad Request</code>
             </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "error": "Field missing",
+    "field": "name"
+}</code></pre>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
             <hr>
             <p>
                 <strong>Status</strong><br>
                 <code>404 Not Found</code>
             </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "error": "Item 1 not found"
+}</code></pre>
         </div>
     </div>
     <h2>Delete</h2>
@@ -215,7 +246,7 @@
             <hr>
             <p>
                 <strong>Description</strong><br>
-                Delete image with ID 2.
+                Delete image with ID 1.
             </p>
             <p>
                 <strong>Method</strong><br>
@@ -223,7 +254,7 @@
             </p>
             <p>
                 <strong>URL</strong><br>
-                <code>http://localhost:3000/2</code>
+                <code>http://localhost:3000/1</code>
             </p>
         </div>
         <div>
@@ -243,6 +274,14 @@
                 <strong>Status</strong><br>
                 <code>404 Not Found</code>
             </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "error": "Item 1 not found"
+}</code></pre>
         </div>
     </div>
     <h2>Reset</h2>

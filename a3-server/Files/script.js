@@ -45,9 +45,7 @@ async function load(year = null, search = "") {
             })
             
             button[1].addEventListener("click", async () => {
-                await fetch(`${url}/${element["id"]}`, {
-                    method: "DELETE"
-                })
+                await fetch(`${url}/${element["id"]}`, { method: "DELETE" })
                 load()
             })
         }
@@ -126,7 +124,7 @@ form.addEventListener("submit", async event => {
 })
 
 document.querySelector("input[type=reset]").addEventListener("click", async () => {
-    await fetch(`${url}/reset`)
+    await fetch(`${url}/reset`, { method: "DELETE" })
     document.querySelector("input[type=search]").value = ""
     load()
 })
