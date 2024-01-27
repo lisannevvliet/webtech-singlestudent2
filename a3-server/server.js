@@ -63,7 +63,7 @@ app.get("/:id", (req, res) => {
         if (err) {
             res.status(400).send(err)
         } else if (rows.length === 0) {
-            res.sendStatus(404)
+            res.status(404).json({ "error": `Item ${req.params.id} not found` })
         } else {
             res.json(rows)
         }
