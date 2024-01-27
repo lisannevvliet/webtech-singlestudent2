@@ -1,4 +1,4 @@
-const url = "https://webtech.labs.vu.nl/api24/f81597a7"
+const url = "http://localhost:3000"
 
 load()
 
@@ -18,11 +18,14 @@ async function load(year = null, search = "") {
                 <td class="id-${element["id"]}">${element["year"]}</td>
                 <td class="id-${element["id"]}">${element["genre"]}</td>
                 <td class="id-${element["id"]}">${element["description"]}</td>
-                <td><button id="id-${element["id"]}">✎</button></td>
+                <td><button>✎</button></td>
+                <td><button>×</button></td>
             `
             tbody.appendChild(tr)
 
-            document.querySelector(`#id-${element["id"]}`).addEventListener("click", () => {
+            const button = document.querySelectorAll(`td.id-${element["id"]} ~ td button`)
+
+            button[0].addEventListener("click", () => {
                 const input = document.querySelectorAll(".input")
                 const result = document.querySelectorAll(`.id-${element["id"]}`)
 
@@ -33,6 +36,13 @@ async function load(year = null, search = "") {
                 document.querySelector("input[type=submit]").value = "Update"
                 document.querySelector("input[type=submit]").id = `id-${element["id"]}`
                 open()
+            })
+            
+            button[1].addEventListener("click", async () => {
+                await fetch(`${url}/${element["id"]}`, {
+                    method: "DELETE"
+                })
+                load()
             })
         }
 
@@ -66,7 +76,11 @@ async function load(year = null, search = "") {
 const overlay = document.querySelector(".overlay")
 const modal = document.querySelector(".modal")
 
-document.querySelector("div button").addEventListener("click", open)
+document.querySelector("div button").addEventListener("click", () => {
+    form.reset()
+    document.querySelector("input[type=submit]").value = "Add"
+    open()
+})
 document.querySelector(".modal button").addEventListener("click", close)
 overlay.addEventListener("click", close)
 
@@ -93,7 +107,7 @@ form.addEventListener("submit", async event => {
             body: body
         })
     } else {
-        await fetch(`${url}/item/${document.querySelector("input[type=submit]").id.substring(3)}`, {
+        await fetch(`${url}/${document.querySelector("input[type=submit]").id.substring(3)}`, {
             method: "PUT",
             body: body
         })
@@ -107,6 +121,7 @@ form.addEventListener("submit", async event => {
 
 document.querySelector("input[type=reset]").addEventListener("click", async () => {
     await fetch(`${url}/reset`)
+    document.querySelector("input[type=search]").value = ""
     load()
 })
 

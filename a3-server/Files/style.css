@@ -210,7 +210,7 @@ input[type=submit]:hover, button:hover {
     background-color: var(--color-5);
 }
 
-input[type=reset], .modal button {
+tbody td:last-of-type button:last-of-type, input[type=reset], .modal button {
     background-color: var(--color-7);
 }
 
@@ -218,7 +218,7 @@ input[type=reset] {
     margin-left: 1rem;
 }
 
-input[type=reset]:hover, .modal button:hover {
+tbody td:last-of-type button:last-of-type:hover, input[type=reset]:hover, .modal button:hover {
     background-color: var(--color-8);
 }
 

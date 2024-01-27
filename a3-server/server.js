@@ -33,11 +33,14 @@ let db = my_database("./media.db");
 // First, create an express application `app`:
 
 var express = require("express");
+var cors = require("cors")
+var fs = require("fs")
 var app = express();
 
 // We need some middleware to parse JSON data in the body of our HTTP requests:
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 // ###############################################################################
 // Routes
@@ -51,6 +54,17 @@ app.get("/", (_, res) => {
             res.status(400).send(err)
         } else {
             res.json(rows)
+        }
+    })
+})
+
+app.get("/reset", (_, res) => {
+    fs.unlink("./media.db", err => {
+        if (err) {
+            res.status(400).send(err)
+        } else {
+            db = my_database("./media.db")
+            res.sendStatus(204)
         }
     })
 })
