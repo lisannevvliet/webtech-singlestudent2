@@ -48,6 +48,43 @@ app.use(cors())
 // TODO: Add your routes here and remove the example routes once you know how
 //       everything works.
 // ###############################################################################
+
+// This example route responds to http://localhost:3000/hello with an example JSON object.
+// Please test if this works on your own device before you make any changes.
+// Do not remove this endpoint as it is used for codegrade evaluation.
+app.get("/hello", function (req, res) {
+  response_body = { Hello: "World" };
+
+  // This example returns valid JSON in the response, but does not yet set the
+  // associated HTTP response header.  This you should do yourself in your
+  // own routes!
+  res.json(response_body);
+});
+
+// This route responds to http://localhost:3000/db-example by selecting some data from the
+// database and return it as JSON object.
+// Please test if this works on your own device before you make any changes.
+app.get("/db-example", function (req, res) {
+  // Example SQL statement to select the name of all products from a specific brand
+  db.all(
+    `SELECT * FROM media WHERE name=?`,
+    ["Celeste"],
+    function (err, rows) {
+      // TODO: add code that checks for errors so you know what went wrong if anything went wrong
+      // TODO: set the appropriate HTTP response headers and HTTP response codes here.
+
+      // # Return db response as JSON
+      return res.json(rows);
+    }
+  );
+});
+
+app.post("/post-example", function (req, res) {
+  // This is just to check if there is any data posted in the body of the HTTP request:
+  console.log(req.body);
+  return res.json(req.body);
+});
+
 app.get("/", (_, res) => {
     db.all("SELECT * FROM media", (err, rows) => {
         if (err) {
@@ -152,42 +189,6 @@ app.delete("/:id", (req, res) => {
         }
     })
 })
-
-// This example route responds to http://localhost:3000/hello with an example JSON object.
-// Please test if this works on your own device before you make any changes.
-// Do not remove this endpoint as it is used for codegrade evaluation.
-app.get("/hello", function (req, res) {
-  response_body = { Hello: "World" };
-
-  // This example returns valid JSON in the response, but does not yet set the
-  // associated HTTP response header.  This you should do yourself in your
-  // own routes!
-  res.json(response_body);
-});
-
-// This route responds to http://localhost:3000/db-example by selecting some data from the
-// database and return it as JSON object.
-// Please test if this works on your own device before you make any changes.
-app.get("/db-example", function (req, res) {
-  // Example SQL statement to select the name of all products from a specific brand
-  db.all(
-    `SELECT * FROM media WHERE name=?`,
-    ["Celeste"],
-    function (err, rows) {
-      // TODO: add code that checks for errors so you know what went wrong if anything went wrong
-      // TODO: set the appropriate HTTP response headers and HTTP response codes here.
-
-      // # Return db response as JSON
-      return res.json(rows);
-    }
-  );
-});
-
-app.post("/post-example", function (req, res) {
-  // This is just to check if there is any data posted in the body of the HTTP request:
-  console.log(req.body);
-  return res.json(req.body);
-});
 
 // ###############################################################################
 // This should start the server, after the routes have been defined, at port 3000:
