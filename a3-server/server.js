@@ -70,28 +70,29 @@ app.get("/:id", (req, res) => {
     })
 })
 
-const field = ["name", "year", "genre", "poster", "description", "id"]
+const fields = ["name", "year", "genre", "poster", "description", "id"]
 
 app.post("/", (req, res) => {
     const parameters = [req.body.name, req.body.year, req.body.genre, req.body.poster, req.body.description]
 
     db.run("INSERT INTO media (name, year, genre, poster, description) VALUES (?, ?, ?, ?, ?)", parameters, function (err) {
         if (err) {
-            let sent = false
+            let field = ""
 
-            parameters.forEach((element, index) => {
-                if (!element) {
-                    res.status(400).json({
-                        "error": "Field missing",
-                        "field": field[index]
-                    })
-
-                    sent = true
+            for (let i = 0; i < parameters.length; i++) {
+                if (!parameters[i]) {
+                    field = fields[i]
+                    break
                 }
-            })
+            }
 
-            if (!sent) {
+            if (!field) {
                 res.status(400).send(err)
+            } else {
+                res.status(400).json({
+                    "error": "Field missing",
+                    "field": field
+                })
             }
         } else {
             res.status(201).json({ "id": this.lastID })
@@ -104,21 +105,22 @@ app.put("/:id", (req, res) => {
 
     db.run("UPDATE media SET name=?, year=?, genre=?, poster=?, description=? WHERE id=?", parameters, function (err) {
         if (err) {
-            let sent = false
+            let field = ""
 
-            parameters.forEach((element, index) => {
-                if (!element) {
-                    res.status(400).json({
-                        "error": "Field missing",
-                        "field": field[index]
-                    })
-
-                    sent = true
+            for (let i = 0; i < parameters.length; i++) {
+                if (!parameters[i]) {
+                    field = fields[i]
+                    break
                 }
-            })
+            }
 
-            if (!sent) {
+            if (!field) {
                 res.status(400).send(err)
+            } else {
+                res.status(400).json({
+                    "error": "Field missing",
+                    "field": field
+                })
             }
         } else if (this.changes === 0) {
             res.status(404).json({ "error": `Item ${req.params.id} not found` })
