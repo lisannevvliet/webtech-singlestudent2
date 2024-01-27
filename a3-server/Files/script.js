@@ -1,9 +1,15 @@
-const url = "http://localhost:3000"
+let url = "http://localhost:3000"
 
 load()
 
 async function load(year = null, search = "") {
-    const response = await fetch(url)
+    let response
+    try {
+        response = await fetch(url)
+    } catch (error) {
+        url = "https://web-technology-a3-api.onrender.com"
+        response = await fetch(url)
+    }
     const result = await response.json()
     const tbody = document.querySelector("tbody")
     tbody.innerHTML = ""
