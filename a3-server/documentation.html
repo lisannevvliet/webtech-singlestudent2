@@ -4,51 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation</title>
+    <style>
+        h2 ~ div {
+            display: flex;
+        }
+
+        div div {
+            border: 1px solid black;
+            width: 50vw;
+        }
+
+        div div:last-of-type {
+            border-left: none;
+        }
+
+        h3, p, pre {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .body {
+            margin-bottom: 0;
+        }
+
+        pre {
+            margin-top: 0;
+            overflow: scroll;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Resource</th>
-            <th>Request verb</th>
-            <th>Description</th>
-            <th>Status code</th>
-        </tr>
-        <tr>
-            <td>/</td>
-            <td>GET</td>
-            <td>Get a list of all images</td>
-            <td>200 OK</td>
-        </tr>
-        <tr>
-            <td>/234</td>
-            <td>GET</td>
-            <td>Get image with ID 234</td>
-            <td>200 OK</td>
-        </tr>
-        <tr>
-            <td>/999</td>
-            <td>GET</td>
-            <td>Get non-existing image with ID 999</td>
-            <td>404 Not Found</td>
-        </tr>
-        <tr>
-            <td>/</td>
-            <td>POST</td>
-            <td>Create a new image</td>
-            <td>201 Created</td>
-        </tr>
-        <tr>
-            <td>/234</td>
-            <td>PUT</td>
-            <td>Update image with ID 234</td>
-            <td>204 No Content</td>
-        </tr>
-        <tr>
-            <td>/234</td>
-            <td>DELETE</td>
-            <td>Delete image with ID 234</td>
-            <td>204 No Content</td>
-        </tr>
-    </table>
+    <h1>Documentation</h1>
+    <h2>Read</h2>
+    <div>
+        <div>
+            <h3>Requests</h3>
+            <hr>
+            <p>
+                <strong>Description</strong><br>
+                Get a list of all images.
+            </p>
+            <p>
+                <strong>Method</strong><br>
+                <code>GET</code>
+            </p>
+            <p>
+                <strong>URL</strong><br>
+                <code>http://localhost:3000</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Description</strong><br>
+                Get image with ID 1.
+            </p>
+            <p>
+                <strong>Method</strong><br>
+                <code>GET</code>
+            </p>
+            <p>
+                <strong>URL</strong><br>
+                <code>http://localhost:3000/1</code>
+            </p>
+        </div>
+        <div>
+            <h3>Responses</h3>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>200 OK</code>
+            </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>[
+    {
+        "id": 1,
+        "name": "Arcane",
+        "year": "2021",
+        "genre": "animation, action, adventure, tv-show",
+        "poster": "https://www.nerdpool.it/wp-content/uploads/2021/11/poster-arcane.jpg",
+        "description": "Set in Utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League Of Legends champions and the power that will tear them apart."
+    },
+    {
+        "id": 2,
+        "name": "Celeste",
+        "year": "2018",
+        "genre": "platformer, video-game",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Celeste_box_art_full.png",
+        "description": "Celeste is a critically acclaimed two-dimensional platform game developed by Maddy Makes Games. The player controls Madeline, a young woman who sets out to climb Celeste Mountain. The game features tight controls, challenging levels, and a touching story about overcoming personal demons."
+    }
+]</code></pre>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>200 OK</code>
+            </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>[
+    {
+        "id": 1,
+        "name": "Arcane",
+        "year": "2021",
+        "genre": "animation, action, adventure, tv-show",
+        "poster": "https://www.nerdpool.it/wp-content/uploads/2021/11/poster-arcane.jpg",
+        "description": "Set in Utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League Of Legends champions and the power that will tear them apart."
+    }
+]</code></pre>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>404 Not Found</code>
+            </p>
+        </div>
+    </div>
+    <h2>Create</h2>
+    <div>
+        <div>
+            <h3>Request</h3>
+            <hr>
+            <p>
+                <strong>Description</strong><br>
+                Create a new image.
+            </p>
+            <p>
+                <strong>Method</strong><br>
+                <code>POST</code>
+            </p>
+            <p>
+                <strong>URL</strong><br>
+                <code>http://localhost:3000</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "name": "The Greatest Showman",
+    "year": "2017",
+    "genre": "biography, drama, musical",
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjI1NDYzNzY2Ml5BMl5BanBnXkFtZTgwODQwODczNTM@._V1_.jpg",
+    "description": "Celebrates the birth of show business and tells of a visionary who rose from nothing to create a spectacle that became a worldwide sensation."
+}</code></pre>
+        </div>
+        <div>
+            <h3>Responses</h3>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>201 Created</code>
+            </p>
+            <p>
+                <strong>Content-Type</strong><br>
+                <code>application/json</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "id": 3
+}</code></pre>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
+        </div>
+    </div>
+    <h2>Update</h2>
+    <div>
+        <div>
+            <h3>Request</h3>
+            <hr>
+            <p>
+                <strong>Description</strong><br>
+                Update image with ID 2.
+            </p>
+            <p>
+                <strong>Method</strong><br>
+                <code>PUT</code>
+            </p>
+            <p>
+                <strong>URL</strong><br>
+                <code>http://localhost:3000/2</code>
+            </p>
+            <p class="body"><strong>Body</strong><br></p>
+            <pre><code>{
+    "name": "Celeste",
+    "year": "2018",
+    "genre": "platformer, video-game",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Celeste_box_art_full.png",
+    "description": "Celeste is a critically acclaimed two-dimensional platform game developed by Maddy Makes Games. The player controls Madeline, a young woman who sets out to climb Celeste Mountain. The game features tight controls, challenging levels, and a touching story about overcoming personal demons."
+}</code></pre>
+        </div>
+        <div>
+            <h3>Responses</h3>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>204 No Content</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>404 Not Found</code>
+            </p>
+        </div>
+    </div>
+    <h2>Delete</h2>
+    <div>
+        <div>
+            <h3>Request</h3>
+            <hr>
+            <p>
+                <strong>Description</strong><br>
+                Delete image with ID 2.
+            </p>
+            <p>
+                <strong>Method</strong><br>
+                <code>DELETE</code>
+            </p>
+            <p>
+                <strong>URL</strong><br>
+                <code>http://localhost:3000/2</code>
+            </p>
+        </div>
+        <div>
+            <h3>Responses</h3>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>204 No Content</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>400 Bad Request</code>
+            </p>
+            <hr>
+            <p>
+                <strong>Status</strong><br>
+                <code>404 Not Found</code>
+            </p>
+        </div>
+    </div>
 </body>
 </html>
