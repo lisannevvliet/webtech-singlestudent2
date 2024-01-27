@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "concurrently \"node server.js\" \"node test.js\""
+    "test": "concurrently \"node server.js\" \"node Files/test.js\""
   },
   "name": "a3-server",
   "version": "1.0.0",
