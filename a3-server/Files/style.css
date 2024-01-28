@@ -125,12 +125,15 @@ tfoot td div button, tfoot td div input[type=reset] {
 .modal {
     background-color: var(--color-1);
     border-radius: 8px;
+    bottom: 0;
     box-sizing: border-box;
-    left: 50%;
+    height: fit-content;
+    left: 0;
+    margin: auto;
     padding: 1rem;
     position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    right: 0;
+    top: 0;
     width: 50vw;
     z-index: 1;
 }
